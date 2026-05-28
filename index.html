@@ -1,11 +1,62 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>How Much Do You Love Me?</title>
+	<!-- CSS and JS are linked externally by user: style.cc and dev1.js -->
 </head>
 <body>
-    <h1>Welcome to My Portfolio</h1>
+	<header>
+		<h1>How Much Do You Love Me?</h1>
+		<nav>
+			<a href="#page-home">Home</a> |
+			<a href="#page-ask">Ask</a> |
+			<a href="#page-results">Results</a>
+		</nav>
+	</header>
+
+	<!-- Page 1: Home -->
+	<section id="page-home">
+		<h2>Welcome</h2>
+		<p>This little site asks my girlfriend how much she loves me. Use the links above to navigate.</p>
+		<p><a href="#page-ask">Go ask her</a></p>
+	</section>
+
+	<!-- Page 2: Ask (the form) -->
+	<section id="page-ask">
+		<h2>Ask Her</h2>
+		<form id="love-form" action="#page-results" method="get">
+			<label for="name">Your name (optional):</label><br>
+			<input type="text" id="name" name="name"><br><br>
+
+			<label>How much do you love me?</label><br>
+			<input type="radio" id="percent-1" name="love" value="A little">
+			<label for="percent-1">A little</label><br>
+			<input type="radio" id="percent-2" name="love" value="Somewhat">
+			<label for="percent-2">Somewhat</label><br>
+			<input type="radio" id="percent-3" name="love" value="A lot">
+			<label for="percent-3">A lot</label><br>
+			<input type="radio" id="percent-4" name="love" value="Infinitely">
+			<label for="percent-4">Infinitely</label><br><br>
+
+			<label for="message">A short message (optional):</label><br>
+			<textarea id="message" name="message" rows="4" cols="40"></textarea><br><br>
+
+			<button type="submit">Submit</button>
+		</form>
+	</section>
+
+	<!-- Page 3: Results (static placeholder; user JS can update this) -->
+	<section id="page-results">
+		<h2>Results</h2>
+		<p id="result-summary">No answer yet. After she submits, JavaScript (dev1.js) can read the form and show a personalized result here.</p>
+		<p><a href="#page-ask">Ask again</a> | <a href="#page-home">Home</a></p>
+	</section>
+
+	<footer>
+		<p>Designed for a simple three-page HTML experience. Connect style.cc and dev1.js externally.</p>
+	</footer>
 </body>
 </html>
