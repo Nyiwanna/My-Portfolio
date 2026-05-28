@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>How Much Do You Love Me?</title>
-	<!-- CSS and JS are linked externally by user: style.cc and dev1.js -->
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<header>
@@ -17,19 +17,30 @@
 		</nav>
 	</header>
 
+	<style>
+		body {
+			text-align: center;
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+		section {
+			margin: 20px 0;
+		}
+	</style>
+
 	<!-- Page 1: Home -->
 	<section id="page-home">
 		<h2>Welcome</h2>
-		<p>This little site asks my girlfriend how much she loves me. Use the links above to navigate.</p>
+		<p>This little site asks my girlfriend "Saw Yu Nwe" how much she loves me.</p>
 		<p><a href="#page-ask">Go ask her</a></p>
 	</section>
 
 	<!-- Page 2: Ask (the form) -->
 	<section id="page-ask">
 		<h2>Ask Her</h2>
+		<p><strong>I love you infinitely. What about you?</strong></p>
 		<form id="love-form" action="#page-results" method="get">
-			<label for="name">Your name (optional):</label><br>
-			<input type="text" id="name" name="name"><br><br>
 
 			<label>How much do you love me?</label><br>
 			<input type="radio" id="percent-1" name="love" value="A little">
@@ -51,12 +62,45 @@
 	<!-- Page 3: Results (static placeholder; user JS can update this) -->
 	<section id="page-results">
 		<h2>Results</h2>
-		<p id="result-summary">No answer yet. After she submits, JavaScript (dev1.js) can read the form and show a personalized result here.</p>
+		<p id="result-summary">Please Choose Infinitely</p>
 		<p><a href="#page-ask">Ask again</a> | <a href="#page-home">Home</a></p>
 	</section>
 
-	<footer>
-		<p>Designed for a simple three-page HTML experience. Connect style.cc and dev1.js externally.</p>
-	</footer>
+
+	<!-- Embedded JS (was dev1.js) -->
+	<script>
+	// Read the form, show results in #result-summary, and keep hash navigation
+	(function(){
+		var form=document.getElementById('love-form');
+		var result=document.getElementById('result-summary');
+		function summarize(values){
+			var who=values.name?values.name.trim():'Someone';
+			var love=values.love||'No selection';
+			var msg=values.message?(' — "'+values.message.trim()+'"') : '';
+			return who+ ' says: ' + love + msg;
+		}
+		function readForm(){
+			var data={};
+			data.name=document.getElementById('name').value;
+			var radios=document.getElementsByName('love');
+			for(var i=0;i<radios.length;i++){if(radios[i].checked){data.love=radios[i].value;break}}
+			data.message=document.getElementById('message').value;
+			return data;
+		}
+		form.addEventListener('submit',function(e){
+			e.preventDefault();
+			var data=readForm();
+			result.textContent=summarize(data);
+			location.hash='#page-results';
+		});
+		// If user navigates to results with query params (optional), parse and show
+		window.addEventListener('hashchange',function(){
+			if(location.hash==='#page-results'){
+				// nothing extra; keep current result
+			}
+		});
+	})();
+	</script>
 </body>
 </html>
+
